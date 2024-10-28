@@ -36,7 +36,17 @@ void creation(tache tab[], int n) {
     }
 }
 // fonction d'affichade d'une tache 
-voide afficher()
+void affichage(tache tab[],int n){
+    int i;
+
+    for (i = 0; i < n; i++) {
+      printf("Tritre:%s\n",tab[i].name);
+      printf("description:%s\n",tab[i].description);
+      printf("date:%d/%d/%d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
+      printf("priorite:%s\n",tab[i].priorite);
+      
+}}
+
 
 
 
