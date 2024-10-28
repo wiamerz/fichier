@@ -47,10 +47,6 @@ void affichage(tache tab[],int n){
       
 }}
 
-
-
-
-
 int main(void) {
     tache tab[100];
     int choix, n;
