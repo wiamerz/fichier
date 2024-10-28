@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-// DÈclaration des structures
+// D√©claration des structures
 typedef struct {
     int jour;
     int mois;
     int annee;
 } date;
 
-// Structure imbriquÈe
+// Structure imbriqu√©e
 typedef struct {
     char name[30];
     char description[100];
@@ -16,13 +16,13 @@ typedef struct {
     date date;
 } tache;
 
-// Fonction de crÈation des t‚ches
+// Fonction de cr√©ation des t√¢ches
 void creation(tache tab[], int n) {
     int i;
 
     for (i = 0; i < n; i++) {
         printf("Entrer le titre de cette tache: ");
-        scanf(" %[^\n]", tab[i].name); // Utilisation de %[^\n] pour lire la ligne complËte
+        scanf(" %[^\n]", tab[i].name); // Utilisation de %[^\n] pour lire la ligne compl√®te
         printf("Entrer une description pour cette tache: ");
         scanf(" %[^\n]", tab[i].description);
         printf("Entrer le jour: ");
@@ -35,17 +35,22 @@ void creation(tache tab[], int n) {
         scanf(" %[^\n]", tab[i].priorite);
     }
 }
+// fonction d'affichade d'une tache 
+voide afficher()
+
+
+
 
 int main(void) {
     tache tab[100];
     int choix, n;
 
-    printf("Combien de t‚ches voulez-vous crÈer ? ");
+    printf("Combien de t√¢ches voulez-vous cr√©er ? ");
     scanf("%d", &n);
 
     while (choix != 6) {
         printf("\n~~~~~~~~~~MENU~~~~~~~~~~~~~~~\n");
-        printf("1. CrÈer\n");
+        printf("1. Cr√©er\n");
         printf("2. Afficher\n");
         printf("3. Modifier\n");
         printf("4. Supprimer\n");
@@ -59,8 +64,9 @@ int main(void) {
             case 1:
                 creation(tab, n);
                 break;
-
-
+            case 2:
+               affichage(tab,n);
+               break;
 
 
 
@@ -69,7 +75,7 @@ int main(void) {
                 break;
 
             default:
-                printf("Choix invalide. Veuillez rÈessayer.\n");
+                printf("Choix invalide. Veuillez r√©essayer.\n");
         }
     }
 
