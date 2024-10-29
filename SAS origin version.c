@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-// D√©claration des structures
+// DÈclaration des structures
 typedef struct {
     int jour;
     int mois;
     int annee;
 } date;
 
-// Structure imbriqu√©e
+// Structure imbriquÈe
 typedef struct {
     char name[30];
     char description[100];
@@ -16,17 +16,13 @@ typedef struct {
     date date;
 } tache;
 
-// Fonction de cr√©ation des t√¢ches
+// Fonction de crÈation des t‚ches
 void creation(tache tab[], int n) {
     int i;
 
     for (i = 0; i < n; i++) {
         printf("Entrer le titre de cette tache: ");
-<<<<<<< HEAD
         scanf(" %[^\n]", tab[i].name); // Utilisation de %[^\n] pour lire l'espace est afficher la phrase complet
-=======
-        scanf(" %[^\n]", tab[i].name); // Utilisation de %[^\n] pour lire la ligne compl√®te
->>>>>>> 9b65f0f234ed4cb581dbb9ba289880292f103310
         printf("Entrer une description pour cette tache: ");
         scanf(" %[^\n]", tab[i].description);
         printf("Entrer le jour: ");
@@ -39,11 +35,7 @@ void creation(tache tab[], int n) {
         scanf(" %[^\n]", tab[i].priorite);
     }
 }
-<<<<<<< HEAD
 // fonction d'affichade d'une tache
-=======
-// fonction d'affichade d'une tache 
->>>>>>> 9b65f0f234ed4cb581dbb9ba289880292f103310
 void affichage(tache tab[],int n){
     int i;
 
@@ -52,7 +44,6 @@ void affichage(tache tab[],int n){
       printf("description:%s\n",tab[i].description);
       printf("date:%d/%d/%d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
       printf("priorite:%s\n",tab[i].priorite);
-<<<<<<< HEAD
 
 }}
 
@@ -78,25 +69,17 @@ void modification(tache tab[],int n){
         scanf(" %[^\n]", tab[i-1].priorite);
     }
 }
-=======
-      
-}}
->>>>>>> 9b65f0f234ed4cb581dbb9ba289880292f103310
 
 int main(void) {
     tache tab[100];
     int choix, n;
 
-<<<<<<< HEAD
     printf("Combien des taches voulez-vous creer ?: ");
-=======
-    printf("Combien de t√¢ches voulez-vous cr√©er ? ");
->>>>>>> 9b65f0f234ed4cb581dbb9ba289880292f103310
     scanf("%d", &n);
 
     while (choix != 6) {
         printf("\n~~~~~~~~~~MENU~~~~~~~~~~~~~~~\n");
-        printf("1. Cr√©er\n");
+        printf("1. CrÈer\n");
         printf("2. Afficher\n");
         printf("3. Modifier\n");
         printf("4. Supprimer\n");
@@ -113,21 +96,16 @@ int main(void) {
             case 2:
                affichage(tab,n);
                break;
-<<<<<<< HEAD
             case 3:
                 modification(tab,n);
             break;
-=======
-
-
->>>>>>> 9b65f0f234ed4cb581dbb9ba289880292f103310
 
         case 6:
                 printf("Quitter le programme.\n");
                 break;
 
             default:
-                printf("Choix invalide. Veuillez r√©essayer.\n");
+                printf("Choix invalide. Veuillez rÈessayer.\n");
         }
     }
 
