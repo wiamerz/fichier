@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-// D�claration des structures
+// Déclaration des structures
 typedef struct {
     int jour;
     int mois;
     int annee;
 } date;
 
-// Structure imbriqu�e
+// Structure imbriquée
 typedef struct {
     char name[30];
     char description[100];
@@ -16,7 +16,7 @@ typedef struct {
     date date;
 } tache;
 
-// Fonction de cr�ation des t�ches
+// Fonction de création des tâches
 void creation(tache tab[], int n) {
     int i;
 
@@ -85,46 +85,46 @@ void supression(tache tab[],int n){
             tab[i]=tab[i+1];
            }
            n--;
-        printf("La tache a ete supprim�e avec succes.\n");
+        printf("La tache a ete supprimée avec succes.\n");
         printf("Les taches restantes sont :\n");
         affichage(tab, n);
     }
 }
-//Fonction de filtrage par priorite
-void filtragepriorite(tache tab[],int n){
-
-    char priorite ;
+// Fonction de filtrage par priorité
+void filtragepriorite(tache tab[], int n) {
+    char priorite;
     int i;
-    printf("entrer une priorit H pour hight L pour low");
-    scanf ("%s",&priorite);
-    switch (priorite){
-        case 'L':
 
-         for (i = 0; i < n; i++) {
-            if (strcmp(tab[i].priorite,'low')==0){
-         printf("Tritre:%s\n",tab[i].name);
-         printf("description:%s\n",tab[i].description);
-         printf("date:%d/%d/%d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
-         printf("priorite:%s\n",tab[i].priorite);
-         }
-    }
-       break;
+    printf("Entrer une priorité : 'H' pour high, 'L' pour low : ");
+    scanf(" %c", &priorite);  // Utiliser %c pour un char
+
+    switch (priorite) {
+        case 'L':
+            for (i = 0; i < n; i++) {
+                if (strcmp(tab[i].priorite, "low") == 0) {  // pour comparer la chaîne de caractères stockée dans tab[i].priorite avec la chaîne "low".
+                    printf("Titre : %s\n", tab[i].name);
+                    printf("Description : %s\n", tab[i].description);
+                    printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+                    printf("Priorité : %s\n", tab[i].priorite);
+                }
+            }
+            break;
 
         case 'H':
+            for (i = 0; i < n; i++) {
+                if (strcmp(tab[i].priorite, "high") == 0) {  // pour comparer la chaîne de caractères stockée dans tab[i].priorite avec la chaîne "high".
+                    printf("Titre : %s\n", tab[i].name);
+                    printf("Description : %s\n", tab[i].description);
+                    printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+                    printf("Priorité : %s\n", tab[i].priorite);
+                }
+            }
+            break;
 
-         for (i = 0; i < n; i++) {
-            if (strcmp(tab[i].priorite,'hight')==0){
-         printf("Tritre:%s\n",tab[i].name);
-         printf("description:%s\n",tab[i].description);
-         printf("date:%d/%d/%d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
-         printf("priorite:%s\n",tab[i].priorite);
-         }
+        default:
+            printf("Priorité non reconnue. Veuillez entrer 'H' ou 'L'.\n");
     }
-       break;
-
-
 }
-
 
 
 int main() {
@@ -167,7 +167,7 @@ int main() {
                 break;
 
             default:
-                printf("Choix invalide. Veuillez r�essayer.\n");
+                printf("Choix invalide. Veuillez réessayer.\n");
         }
     }
 
