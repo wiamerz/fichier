@@ -70,16 +70,73 @@ void modification(tache tab[],int n){
     }
 }
 
-int main(void) {
+
+
+// fonction de supression d'une tache
+void supression(tache tab[],int n){
+       int pos,i;
+       printf ("entrer la position de la tache que vouler supprimer :");
+       scanf ("%d",&pos);
+
+    if ( pos <= 0 || pos > n ){
+        printf("Position non trouve, veuillez entrer une autre :");
+        } else {
+           for (i =pos-1 ; i<n-1 ; i++){
+            tab[i]=tab[i+1];
+           }
+           n--;
+        printf("La tache a ete supprimée avec succes.\n");
+        printf("Les taches restantes sont :\n");
+        affichage(tab, n);
+    }
+}
+//Fonction de filtrage par priorite
+void filtragepriorite(tache tab[],int n){
+
+    char priorite ;
+    int i;
+    printf("entrer une priorit H pour hight L pour low");
+    scanf ("%s",&priorite);
+    switch (priorite){
+        case 'L':
+
+         for (i = 0; i < n; i++) {
+            if (strcmp(tab[i].priorite,'low')==0){
+         printf("Tritre:%s\n",tab[i].name);
+         printf("description:%s\n",tab[i].description);
+         printf("date:%d/%d/%d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
+         printf("priorite:%s\n",tab[i].priorite);
+         }
+    }
+       break;
+
+        case 'H':
+
+         for (i = 0; i < n; i++) {
+            if (strcmp(tab[i].priorite,'hight')==0){
+         printf("Tritre:%s\n",tab[i].name);
+         printf("description:%s\n",tab[i].description);
+         printf("date:%d/%d/%d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
+         printf("priorite:%s\n",tab[i].priorite);
+         }
+    }
+       break;
+
+
+}
+
+
+
+int main() {
     tache tab[100];
-    int choix, n;
+    int choix , n ;
 
     printf("Combien des taches voulez-vous creer ?: ");
     scanf("%d", &n);
 
     while (choix != 6) {
         printf("\n~~~~~~~~~~MENU~~~~~~~~~~~~~~~\n");
-        printf("1. Créer\n");
+        printf("1. Creer\n");
         printf("2. Afficher\n");
         printf("3. Modifier\n");
         printf("4. Supprimer\n");
@@ -99,8 +156,13 @@ int main(void) {
             case 3:
                 modification(tab,n);
             break;
-
-        case 6:
+            case 4:
+                supression(tab,n);
+             break;
+            case 5:
+                filtragepriorite(tab,n);
+            break;
+            case 6:
                 printf("Quitter le programme.\n");
                 break;
 
