@@ -1,14 +1,22 @@
 #include <stdio.h>
 #include <string.h>
 
+<<<<<<< HEAD
 // DÃƒÂ©claration des structures
+=======
+// Déclaration des structures
+>>>>>>> 7747e68 (n)
 typedef struct {
     int jour;
     int mois;
     int annee;
 } date;
 
+<<<<<<< HEAD
 // Structure imbriquÃƒÂ©e
+=======
+// Structure imbriquée
+>>>>>>> 7747e68 (n)
 typedef struct {
     char name[30];
     char description[100];
@@ -16,7 +24,11 @@ typedef struct {
     date date;
 } tache;
 
+<<<<<<< HEAD
 // Fonction de crÃƒÂ©ation des tÃƒÂ¢ches
+=======
+// Fonction de création des tâches
+>>>>>>> 7747e68 (n)
 void creation(tache tab[], int n) {
     int i;
 
@@ -85,13 +97,21 @@ void supression(tache tab[],int n){
             tab[i]=tab[i+1];
            }
            n--;
+<<<<<<< HEAD
         printf("La tache a ete supprimÃƒÂ©e avec succes.\n");
+=======
+        printf("La tache a ete supprimee avec succes.\n");
+>>>>>>> 7747e68 (n)
         printf("Les taches restantes sont :\n");
         affichage(tab, n);
     }
 }
+<<<<<<< HEAD
 
 // Fonction de filtrage par prioritÃ©
+=======
+// Fonction de filtrage par priorité
+>>>>>>> 7747e68 (n)
 void filtragepriorite(tache tab[], int n) {
     char priorite;
     int i;
@@ -104,7 +124,13 @@ void filtragepriorite(tache tab[], int n) {
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+<<<<<<< HEAD
                     printf("PrioritÃ© : %s\n", tab[i].priorite);
+=======
+                    printf("Priorité : %s\n", tab[i].priorite);
+                } else {
+                printf("on a aucune tache avec cette priorite\n.");
+>>>>>>> 7747e68 (n)
                 }
             }
             break;
@@ -115,7 +141,13 @@ void filtragepriorite(tache tab[], int n) {
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+<<<<<<< HEAD
                     printf("PrioritÃ© : %s\n", tab[i].priorite);
+=======
+                    printf("Priorité : %s\n", tab[i].priorite);
+                } else {
+                printf("on a aucune tache avec cette priorite\n.");
+>>>>>>> 7747e68 (n)
                 }
             }
             break;
@@ -167,7 +199,11 @@ int main() {
                 break;
 
             default:
+<<<<<<< HEAD
                 printf("Choix invalide. Veuillez rÃƒÂ©essayer.\n");
+=======
+                printf("Choix invalide. Veuillez réessayer.\n");
+>>>>>>> 7747e68 (n)
         }
     }
 
