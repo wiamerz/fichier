@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-// DÈclaration des structures
+// D√©claration des structures
 typedef struct {
     int jour;
     int mois;
     int annee;
 } date;
 
-// Structure imbriquÈe
+// Structure imbriqu√©e
 typedef struct {
     char name[30];
     char description[100];
@@ -16,7 +16,7 @@ typedef struct {
     date date;
 } tache;
 
-// Fonction de crÈation des t‚ches
+// Fonction de cr√©ation des t√¢ches
 void creation(tache tab[], int n) {
     int i;
 
@@ -85,11 +85,12 @@ void supression(tache tab[],int n){
             tab[i]=tab[i+1];
            }
            n--;
-        printf("La tache a ete supprimÈe avec succes.\n");
+        printf("La tache a ete supprim√©e avec succes.\n");
         printf("Les taches restantes sont :\n");
         affichage(tab, n);
     }
 }
+<<<<<<< HEAD
 // Fonction de filtrage par prioritÈ
 void filtragepriorite(tache tab[], int n) {
     char priorite;
@@ -124,6 +125,8 @@ void filtragepriorite(tache tab[], int n) {
     }
 
 }
+=======
+>>>>>>> 35e244aebd958b8a555f5e5ceae727c39cf65427
 
 
 int main() {
@@ -166,7 +169,7 @@ int main() {
                 break;
 
             default:
-                printf("Choix invalide. Veuillez rÈessayer.\n");
+                printf("Choix invalide. Veuillez r√©essayer.\n");
         }
     }
 
