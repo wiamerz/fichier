@@ -13,6 +13,7 @@ typedef struct {
     char name[30];
     char description[100];
     char priorite[30];
+    char statut[30];
     date date;
 } tache;
 
@@ -33,6 +34,8 @@ void creation(tache tab[], int n) {
         scanf("%d", &tab[i].date.annee);
         printf("Entrer la priorite de cette tache: ");
         scanf(" %[^\n]", tab[i].priorite);
+        printf("Entrer le statut de cette tache: ");
+        scanf(" %[^\n]", tab[i].statut);
     }
 }
 // fonction d'affichade d'une tache
@@ -44,7 +47,7 @@ void affichage(tache tab[],int n){
       printf("description:%s\n",tab[i].description);
       printf("date: %d/ %d/ %d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
       printf("priorite:%s\n",tab[i].priorite);
-
+      printf("statue:%s\n",tab[i].statut);
 }}
 
 // fonction de modification d'une tache
@@ -60,14 +63,15 @@ void modification(tache tab[], int n) {
         return;
     }
 
-    while (choice != 6) {
+    while (choice != 7) {
         printf("\n~~~~~~~~~~LISTE~~~~~~~~~~~~~~~\n");
         printf("1. Nom\n");
         printf("2. Description\n");
         printf("3. Date\n");
-        printf("4. Priorité\n");
-        printf("5. Modifier tous\n");
-        printf("6. Retour au menu\n");
+        printf("4. Priorite\n");
+        printf("5. statut\n");
+        printf("6. Modifier tous\n");
+        printf("7. Retour au menu\n");
 
         printf("Entrer votre choix: ");
         scanf("%d", &choice);
@@ -86,20 +90,26 @@ void modification(tache tab[], int n) {
                 scanf("%d/%d/%d", &tab[i - 1].date.jour, &tab[i - 1].date.mois, &tab[i - 1].date.annee);
                 break;
             case 4:
-                printf("Entrer la nouvelle priorité: ");
+                printf("Entrer la nouvelle priorite: ");
                 scanf("%d", &tab[i - 1].priorite); // On suppose que la priorité est un entier
                 break;
             case 5:
-                printf("Entrer un autre titre pour cette tâche: ");
+                printf("Entrer la nouvelle statut: ");
+                scanf("%d", &tab[i - 1].statut); // On suppose que la priorité est un entier
+                break;
+            case 6:
+                printf("Entrer un autre titre pour cette tache: ");
                 scanf(" %[^\n]", tab[i - 1].name);
-                printf("Entrer une autre description pour cette tâche: ");
+                printf("Entrer une autre description pour cette tache: ");
                 scanf(" %[^\n]", tab[i - 1].description);
                 printf("Entrer la nouvelle date (jour mois annee): ");
                 scanf("%d/%d/%d", &tab[i - 1].date.jour, &tab[i - 1].date.mois, &tab[i - 1].date.annee);
-                printf("Entrer la priorité de cette tâche: ");
+                printf("Entrer la priorité de cette tache: ");
                 scanf("%d", &tab[i - 1].priorite);
+                 printf("Entrer la statut de cette tache: ");
+                scanf("%d", &tab[i - 1].statut);
                 break;
-            case 6:
+            case 7:
                 printf("Quitter la liste.\n");
                 break;
             default:
@@ -107,27 +117,6 @@ void modification(tache tab[], int n) {
         }
     }
 }
-
-
-   /* if (i<=0||i>n) //l'indice il faut pas depasse n et pas moins ou egale  0
-        printf("Indice non trouve, veuillez entrer un autre :");
-    else {
-         printf("Entrer un autre titre pour cette tache: ");
-        scanf(" %[^\n]", tab[i-1].name);
-        printf("Entrer une autre description pour cette tache: ");
-        scanf(" %[^\n]", tab[i-1].description);
-        printf("Entrer le jour: ");
-        scanf("%d", &tab[i-1].date.jour);
-        printf("Entrer le mois: ");
-        scanf("%d", &tab[i-1].date.mois);
-        printf("Entrer l'annee: ");
-        scanf("%d", &tab[i-1].date.annee);
-        printf("Entrer la priorite de cette tache: ");
-        scanf(" %[^\n]", tab[i-1].priorite);
-    }
-}
-*/
-
 
 // fonction de supression d'une tache
 void supression(tache tab[],int n){
@@ -161,6 +150,7 @@ void filtragepriorite(tache tab[], int n) {
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
                     printf("Priorité : %s\n", tab[i].priorite);
+                    printf("statut : %s\n", tab[i].statut);
                 } else {
                 printf("on a aucune tache avec cette priorite\n.");
                 }
@@ -174,7 +164,10 @@ void filtragepriorite(tache tab[], int n) {
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
                     printf("Priorité : %s\n", tab[i].priorite);
-                } else {
+                    printf("statut : %s\n", tab[i].statut);
+                }
+
+                else {
                 printf("on a aucune tache avec cette priorite\n.");
                 }
             }
@@ -187,6 +180,51 @@ void filtragepriorite(tache tab[], int n) {
 }
 
 
+
+// Fonction de filtrage par statue
+void filtragestatut(tache tab[], int n) {
+    char statut;
+    int i;
+    printf("Entrer une statue: 'I' pour incomplete, 'C' pour complete : ");
+    scanf(" %c", &statut);
+    switch (statut) {
+        case 'I':
+            for (i = 0; i < n; i++) {
+                if (strcmp(tab[i].statut, "incomplete") == 0) {
+                    printf("Titre : %s\n", tab[i].name);
+                    printf("Description : %s\n", tab[i].description);
+                    printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+                    printf("Priorité : %s\n", tab[i].priorite);
+                    printf("statut : %s\n", tab[i].statut);
+                } else {
+                printf("on a aucune tache avec cette statut\n.");
+                }
+            }
+            break;
+
+        case 'C':
+            for (i = 0; i < n; i++) {
+                if (strcmp(tab[i].statut, "complete") == 0) {
+                    printf("Titre : %s\n", tab[i].name);
+                    printf("Description : %s\n", tab[i].description);
+                    printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+                    printf("Priorité : %s\n", tab[i].priorite);
+                     printf("statut : %s\n", tab[i].statut);
+                }
+
+                else {
+                printf("on a aucune tache avec cette statut\n.");
+                }
+            }
+            break;
+
+        default:
+            printf("Priorité non reconnue. Veuillez entrer 'I' ou 'C'.\n");
+    }
+
+}
+
+
 int main() {
     tache tab[100];
     int choix , n ;
@@ -194,14 +232,15 @@ int main() {
     printf("Combien des taches voulez-vous creer ?: ");
     scanf("%d", &n);
 
-    while (choix != 6) {
+    while (choix != 7) {
         printf("\n~~~~~~~~~~MENU~~~~~~~~~~~~~~~\n");
         printf("1. Creer\n");
         printf("2. Afficher\n");
         printf("3. Modifier\n");
         printf("4. Supprimer\n");
         printf("5. Filtrer par priorite\n");
-        printf("6. Quitter\n");
+        printf("6. Filtrer par statue\n");
+        printf("7. Quitter\n");
 
         printf("Entrer votre choix: ");
         scanf("%d", &choix);
@@ -223,6 +262,9 @@ int main() {
                 filtragepriorite(tab,n);
             break;
             case 6:
+                filtragestatut(tab,n);
+            break;
+            case 7:
                 printf("Quitter le programme.\n");
                 break;
 
