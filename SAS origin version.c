@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+ int choix  ;
+ int n=0;  // Initialisation de n à 0 pour indiquer aucune tâche
+
 // Déclaration des structures
 typedef struct {
     int jour;
@@ -18,10 +21,14 @@ typedef struct {
 } tache;
 
 // Fonction de création des tâches
-void creation(tache tab[], int n) {
+void creation(tache tab[]) {
     int i;
 
+    printf("combien des taches vouler-vous cree:");
+    scanf("%d",&n);
+
     for (i = 0; i < n; i++) {
+        printf("\n---- Tache %d ----\n", i + 1); // Affiche le numéro de la tache
         printf("Entrer le titre de cette tache: ");
         scanf(" %[^\n]", tab[i].name); // Utilisation de %[^\n] pour lire l'espace est afficher la phrase complet
         printf("Entrer une description pour cette tache: ");
@@ -39,22 +46,28 @@ void creation(tache tab[], int n) {
     }
 }
 // fonction d'affichade d'une tache
-void affichage(tache tab[],int n){
-    int i;
+void affichage(tache tab[]) {
+    if (n <= 0) {
+        printf("Aucune tache à afficher.\n");
+        return;
+    }
 
-    for (i = 0; i < n; i++) {
-      printf("Tritre:%s\n",tab[i].name);
-      printf("description:%s\n",tab[i].description);
-      printf("date: %d/ %d/ %d\n",tab[i].date.jour,tab[i].date.mois,tab[i].date.annee);
-      printf("priorite:%s\n",tab[i].priorite);
-      printf("statue:%s\n",tab[i].statut);
-}}
+    for (int i = 0; i < n; i++) {
+        printf("\n---- Tache %d ----\n", i + 1);
+        printf("Titre : %s\n", tab[i].name);
+        printf("Description : %s\n", tab[i].description);
+        printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+        printf("Priorite : %s\n", tab[i].priorite);
+        printf("Statut : %s\n", tab[i].statut);
+    }
+}
+
 
 // fonction de modification d'une tache
 void modification(tache tab[], int n) {
     int i, choice = 0;
 
-    printf("Entrer l'indice de la tâche que vous voulez modifier: ");
+    printf("Entrer l'indice de la tache que vous voulez modifier: ");
     scanf("%d", &i);
 
     // Vérification de la validité de l'indice
@@ -86,16 +99,16 @@ void modification(tache tab[], int n) {
                 scanf(" %[^\n]", tab[i - 1].description);
                 break;
             case 3:
-                printf("Entrer la nouvelle date (jour mois annee): ");
+                printf("Entrer la nouvelle date (jour /mois /annee): ");
                 scanf("%d/%d/%d", &tab[i - 1].date.jour, &tab[i - 1].date.mois, &tab[i - 1].date.annee);
                 break;
             case 4:
                 printf("Entrer la nouvelle priorite: ");
-                scanf("%d", &tab[i - 1].priorite); // On suppose que la priorité est un entier
+                scanf(" %[^\n]", &tab[i - 1].priorite);
                 break;
             case 5:
                 printf("Entrer la nouvelle statut: ");
-                scanf("%d", &tab[i - 1].statut); // On suppose que la priorité est un entier
+                scanf(" %[^\n]", &tab[i - 1].statut);
                 break;
             case 6:
                 printf("Entrer un autre titre pour cette tache: ");
@@ -105,9 +118,9 @@ void modification(tache tab[], int n) {
                 printf("Entrer la nouvelle date (jour mois annee): ");
                 scanf("%d/%d/%d", &tab[i - 1].date.jour, &tab[i - 1].date.mois, &tab[i - 1].date.annee);
                 printf("Entrer la priorité de cette tache: ");
-                scanf("%d", &tab[i - 1].priorite);
+               scanf(" %[^\n]", tab[i - 1].priorite);
                  printf("Entrer la statut de cette tache: ");
-                scanf("%d", &tab[i - 1].statut);
+               scanf(" %[^\n]", tab[i - 1].statut);
                 break;
             case 7:
                 printf("Quitter la liste.\n");
@@ -119,7 +132,7 @@ void modification(tache tab[], int n) {
 }
 
 // fonction de supression d'une tache
-void supression(tache tab[],int n){
+void supression(tache tab[]){
        int pos,i;
        printf ("entrer la position de la tache que vouler supprimer :");
        scanf ("%d",&pos);
@@ -133,93 +146,104 @@ void supression(tache tab[],int n){
            n--;
         printf("La tache a ete supprimee avec succes.\n");
         printf("Les taches restantes sont :\n");
-        affichage(tab, n);
+        affichage(tab);
     }
 }
 // Fonction de filtrage par priorité
-void filtragepriorite(tache tab[], int n) {
+void filtragepriorite(tache tab[]) {
     char priorite;
-    int i;
+    int i, found = 0;
     printf("Entrer une priorité : 'H' pour high, 'L' pour low : ");
-    scanf(" %c", &priorite);  // Utiliser %c pour un char
+    scanf(" %c", &priorite);
     switch (priorite) {
         case 'L':
             for (i = 0; i < n; i++) {
-                if (strcmp(tab[i].priorite, "low") == 0) {  // pour comparer la chaîne de caractères stockée dans tab[i].priorite avec la chaîne "low".
+                if (strcmp(tab[i].priorite, "low") == 0) {  //strcmp pour comparer la chaîne de caractères stockée dans tab[i].priorite avec la chaîne "low".
+                    printf("\n---- Tâche %d ----\n", i + 1);
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
-                    printf("Priorité : %s\n", tab[i].priorite);
+                    printf("Priorite : %s\n", tab[i].priorite);
                     printf("statut : %s\n", tab[i].statut);
-                } else {
-                printf("on a aucune tache avec cette priorite\n.");
-                }
+                    found =1; //tache trouve
+
+                }if (!found) {
+                printf("Aucune tache avec cette priorité.\n");
+            }
             }
             break;
 
         case 'H':
             for (i = 0; i < n; i++) {
                 if (strcmp(tab[i].priorite, "high") == 0) {  // pour comparer la chaîne de caractères stockée dans tab[i].priorite avec la chaîne "high".
+                    printf("\n---- Tâche %d ----\n", i + 1);
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
-                    printf("Priorité : %s\n", tab[i].priorite);
+                    printf("Priorite : %s\n", tab[i].priorite);
                     printf("statut : %s\n", tab[i].statut);
+                    found =1; //tache trouve
                 }
-
-                else {
-                printf("on a aucune tache avec cette priorite\n.");
-                }
+            if (!found) {
+                printf("Aucune tche avec cette priorité.\n");
+            }
             }
             break;
 
         default:
-            printf("Priorité non reconnue. Veuillez entrer 'H' ou 'L'.\n");
+            printf("Priorite non reconnue. Veuillez entrer 'H' ou 'L'.\n");
     }
 
 }
 
 
 
-// Fonction de filtrage par statue
-void filtragestatut(tache tab[], int n) {
+// Fonction de filtrage des tâches par statue
+void filtragestatut(tache tab[]) {
     char statut;
-    int i;
+    int i, found = 0;
     printf("Entrer une statue: 'I' pour incomplete, 'C' pour complete : ");
     scanf(" %c", &statut);
     switch (statut) {
         case 'I':
             for (i = 0; i < n; i++) {
                 if (strcmp(tab[i].statut, "incomplete") == 0) {
+                   printf("\n---- Tache %d ----\n", i + 1);
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
-                    printf("Priorité : %s\n", tab[i].priorite);
+                    printf("Priorite : %s\n", tab[i].priorite);
                     printf("statut : %s\n", tab[i].statut);
-                } else {
-                printf("on a aucune tache avec cette statut\n.");
+                    found =1; //statut trouve
                 }
+
+            if (!found) {
+                printf("Aucune tache avec cette statut.\n");
+            }
             }
             break;
 
         case 'C':
             for (i = 0; i < n; i++) {
                 if (strcmp(tab[i].statut, "complete") == 0) {
+                    printf("\n---- Tache %d ----\n", i + 1);
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
-                    printf("Priorité : %s\n", tab[i].priorite);
+                    printf("Priorite : %s\n", tab[i].priorite);
                      printf("statut : %s\n", tab[i].statut);
+                     found =1; //statut trouve
                 }
 
-                else {
-                printf("on a aucune tache avec cette statut\n.");
-                }
+
+           if (!found) {
+                printf("Aucune tache avec cette statut.\n");
+            }
             }
             break;
 
         default:
-            printf("Priorité non reconnue. Veuillez entrer 'I' ou 'C'.\n");
+            printf("Priorite non reconnue. Veuillez entrer 'I' ou 'C'.\n");
     }
 
 }
@@ -227,10 +251,8 @@ void filtragestatut(tache tab[], int n) {
 
 int main() {
     tache tab[100];
-    int choix , n ;
 
-    printf("Combien des taches voulez-vous creer ?: ");
-    scanf("%d", &n);
+
 
     while (choix != 7) {
         printf("\n~~~~~~~~~~MENU~~~~~~~~~~~~~~~\n");
@@ -247,29 +269,29 @@ int main() {
 
         switch (choix) {
             case 1:
-                creation(tab, n);
+                creation(tab);
                 break;
             case 2:
-               affichage(tab,n);
+               affichage(tab);
                break;
             case 3:
                 modification(tab,n);
             break;
             case 4:
-                supression(tab,n);
+                supression(tab);
              break;
             case 5:
-                filtragepriorite(tab,n);
+                filtragepriorite(tab);
             break;
             case 6:
-                filtragestatut(tab,n);
+                filtragestatut(tab);
             break;
             case 7:
                 printf("Quitter le programme.\n");
                 break;
 
             default:
-                printf("Choix invalide. Veuillez réessayer.\n");
+                printf("Choix invalide. Veuillez reessayer.\n");
         }
     }
 
