@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+
+
  int choix  ;
  int n=0;  // Initialisation de n à 0 pour indiquer aucune tâche
 
@@ -21,34 +23,50 @@ typedef struct {
 } tache;
 
 // Fonction de création des tâches
-void creation(tache tab[]) {
-    int i;
+void creation(tache tab[], int maxTaches) {
+    int i, nouveaunombre;
 
-    printf("combien des taches vouler-vous cree:");
-    scanf("%d",&n);
+    printf("Combien de tâches voulez-vous créer : ");
+    scanf("%d", &nouveaunombre);
 
-    for (i = 0; i < n; i++) {
-        printf("\n---- Tache %d ----\n", i + 1); // Affiche le numéro de la tache
-        printf("Entrer le titre de cette tache: ");
-        scanf(" %[^\n]", tab[i].name); // Utilisation de %[^\n] pour lire l'espace est afficher la phrase complet
-        printf("Entrer une description pour cette tache: ");
-        scanf(" %[^\n]", tab[i].description);
-        printf("Entrer le jour: ");
-        scanf("%d", &tab[i].date.jour);
-        printf("Entrer le mois: ");
-        scanf("%d", &tab[i].date.mois);
-        printf("Entrer l'annee: ");
-        scanf("%d", &tab[i].date.annee);
-        printf("Entrer la priorite de cette tache: ");
-        scanf(" %[^\n]", tab[i].priorite);
-        printf("Entrer le statut de cette tache: ");
-        scanf(" %[^\n]", tab[i].statut);
+    // Vérifier que le nombre des taches ne dépasse pas la capacité que le tableau peut obtenu
+    if (n + nouveaunombre > maxTaches) {
+        printf("Erreur : nombre de taches depassant la capacite maximale (%d).\n", maxTaches - n);
+        return;
     }
+
+    for (i = 0; i < nouveaunombre; i++) {
+        printf("\n---- Tâche %d ----\n", i + 1 + n);
+
+        printf("Entrer le titre de cette tâche : ");
+        scanf(" %[^\n]", tab[n + i].name);
+
+        printf("Entrer une description pour cette tâche : ");
+        scanf(" %[^\n]", tab[n + i].description);
+
+        printf("Entrer le jour : ");
+        scanf("%d", &tab[n + i].date.jour);
+
+        printf("Entrer le mois : ");
+        scanf("%d", &tab[n + i].date.mois);
+
+        printf("Entrer l'année : ");
+        scanf("%d", &tab[n + i].date.annee);
+
+        printf("Entrer la priorité de cette tâche (high/low) : ");
+        scanf(" %[^\n]", tab[n + i].priorite);
+
+        printf("Entrer le statut de cette tâche (complète/incomplète) : ");
+        scanf(" %[^\n]", tab[n + i].statut);
+    }
+
+    n += nouveaunombre;
 }
+
 // fonction d'affichade d'une tache
 void affichage(tache tab[]) {
     if (n <= 0) {
-        printf("Aucune tache à afficher.\n");
+        printf("Aucune tache a afficher.\n");
         return;
     }
 
@@ -250,7 +268,8 @@ void filtragestatut(tache tab[]) {
 
 
 int main() {
-    tache tab[100];
+    int maxTaches = 100;
+    tache tab[maxTaches];
 
 
 
@@ -269,7 +288,7 @@ int main() {
 
         switch (choix) {
             case 1:
-                creation(tab);
+                creation(tab,maxTaches);
                 break;
             case 2:
                affichage(tab);
