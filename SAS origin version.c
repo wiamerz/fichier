@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdbool.h>
 
 
  int choix  ;
@@ -21,6 +21,33 @@ typedef struct {
     char statut[30];
     date date;
 } tache;
+bool validationdate (int jour, int mois, int annee)//to check is the date is valid
+{                                           //and forces user to put a valid one
+    if (annee<2024) return false; //no negative year or less than 2024
+    if (mois<1 || mois>12) return false; //month between 1 and 12
+    //set days of months
+    int lesjoursdemois [] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    if (mois == 2)
+    {                       //leap year is div by 4 and not 100 / or by 400 only
+        if ((annee % 4 == 0 && annee % 100 != 0) || annee % 400 == 0)
+        {
+           lesjoursdemois[2] = 29;//leap year
+        }
+    }
+    return (jour > 0 && jour <= lesjoursdemois[mois]);//validating day date to
+}
+
+// fonction pou la validation de date pour que l'utilisateure n'entrer pas une date differente
+/*bool validationdate (int jour, int mois ,int annee){
+
+    if(jour<1||jour>31) return false;
+    if (mois<1 || mois > 12) return false ;
+    if (annee<2024) return false;
+}*/
+
+
+
 
 // Fonction de création des tâches
 void creation(tache tab[], int maxTaches) {
@@ -35,32 +62,34 @@ void creation(tache tab[], int maxTaches) {
         return;
     }
 
-    for (i = 0; i < nouveaunombre; i++) {
-        printf("\n---- Tâche %d ----\n", i + 1 + n);
+    for (i = n; i < nouveaunombre+n; i++) {
+        printf("\n---- Tache %d ----\n", n + 1 );
 
-        printf("Entrer le titre de cette tâche : ");
-        scanf(" %[^\n]", tab[n + i].name);
+        printf("Entrer le titre de cette tache : ");
+        scanf(" %[^\n]s", tab[i].name);
 
-        printf("Entrer une description pour cette tâche : ");
-        scanf(" %[^\n]", tab[n + i].description);
+        printf("Entrer une description pour cette tache : ");
+        scanf(" %[^\n]s", tab[i].description);
 
-        printf("Entrer le jour : ");
-        scanf("%d", &tab[n + i].date.jour);
+        printf("Entrer date de fin (jj/mm/aaaa) : ");
+        scanf("%d/%d/%d", &tab[i].date.jour, &tab[i].date.mois, &tab[i].date.annee  );
 
-        printf("Entrer le mois : ");
-        scanf("%d", &tab[n + i].date.mois);
+        while (!validationdate(tab[i].date.jour, tab[i].date.mois  , tab[i].date.annee)){
 
-        printf("Entrer l'année : ");
-        scanf("%d", &tab[n + i].date.annee);
+            printf("invalide, entrer une autre date (jj/mm/aaaa):");
+            scanf("%d / %d / %d", &tab[i].date.jour, &tab[i].date.mois  , &tab[i].date.annee  );
+        }
 
-        printf("Entrer la priorité de cette tâche (high/low) : ");
-        scanf(" %[^\n]", tab[n + i].priorite);
 
-        printf("Entrer le statut de cette tâche (complète/incomplète) : ");
-        scanf(" %[^\n]", tab[n + i].statut);
+
+        printf("Entrer la priorite de cette tache (high/low) : ");
+        scanf(" %[^\n]s", tab[i].priorite);
+
+        printf("Entrer le statut de cette tache (complete/incomplete) : ");
+        scanf(" %[^\n]s", tab[i].statut);
     }
 
-    n += nouveaunombre;
+    n = n + nouveaunombre;
 }
 
 // fonction d'affichade d'une tache
