@@ -22,6 +22,35 @@ typedef struct {
     date date;
 } tache;
 
+
+// Fonction pour enregistrer les tâches
+int save(tache tab[], int n) {
+    if (n == 0) {
+        printf("Aucune tâche à enregistrer, ajoutez des tâches d'abord.\n");
+    } else {
+        FILE *fichier;
+        fichier = fopen("gestiontaches.txt", "a"); // Nom du fichier modifié pour correspondre au message
+        if (fichier == NULL) {
+            printf("Erreur lors de l'ouverture du fichier.\n");
+            return 1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            fprintf(fichier, "~~~~~~~~~~~~ La tâche %d ~~~~~~~~~~~~\n", i + 1);
+            fprintf(fichier, "Titre : %s\n", tab[i].name);
+            fprintf(fichier, "Description : %s\n", tab[i].description);
+            fprintf(fichier, "Date de fin jj/mm/aaaa : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+            fprintf(fichier, "Priorité : %d\n", tab[i].priorite);
+            fprintf(fichier, "Statue : %d\n\n", tab[i].statue);
+        }
+
+        fclose(fichier);
+        printf("Les tâches ont été enregistrées dans gestiontaches.txt.\n");
+    }
+    return 0;
+}
+
+
 // Fonction de validation de la date pour s'assurer que l'utilisateur n'entre pas une date non valide.
 bool validationdate (int jour, int mois, int annee)
 {
@@ -230,8 +259,8 @@ void filtragepriorite(tache tab[]) {
 void filtragestatut(tache tab[]) {
     int statue;
     int i, found = 0;
-    printf("Entrer une statue: 'I' pour incomplete, 'C' pour complete : ");
-    scanf(" %c", &statue);
+    printf("Entrer une statue: 0 pour incomplete, 1 pour complete : ");
+    scanf("%d", &statue);
 
      if (statue != 0 && statue != 1) {
         printf("Priorite non reconnue. Veuillez entrer 0 ou 1.\n");
@@ -243,8 +272,8 @@ void filtragestatut(tache tab[]) {
                     printf("Titre : %s\n", tab[i].name);
                     printf("Description : %s\n", tab[i].description);
                     printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
-                    printf("Priorite : %s\n", tab[i].priorite);
-                    printf("statue : %s\n", tab[i].statue);
+                    printf("Priorite : %d\n", tab[i].priorite);
+                    printf("statue : %d\n", tab[i].statue);
                     found =1; //statue trouve
                 }
             }if (!found) {
@@ -260,7 +289,7 @@ int main() {
 
 
 
-    while (choix != 7) {
+    while (choix != 8) {
         printf("\n~~~~~~~~~~MENU~~~~~~~~~~~~~~~\n");
         printf("1. Creer\n");
         printf("2. Afficher\n");
@@ -268,7 +297,8 @@ int main() {
         printf("4. Supprimer\n");
         printf("5. Filtrer par priorite\n");
         printf("6. Filtrer par statue\n");
-        printf("7. Quitter\n");
+        printf("7. Save\n");
+        printf("8. Quitter\n");
 
         printf("Entrer votre choix: ");
         scanf("%d", &choix);
@@ -293,6 +323,9 @@ int main() {
                 filtragestatut(tab);
             break;
             case 7:
+                save(tab,n);
+            break;
+            case 8:
                 printf("Quitter le programme.\n");
                 break;
 

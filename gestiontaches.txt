@@ -1,0 +1,7 @@
+~~~~~~~~~~~~ La tâche 1 ~~~~~~~~~~~~
+Titre : plan 
+Description : creation de plan pour notre projet
+Date de fin jj/mm/aaaa : 1/11/2024
+Priorité : 0
+Statue : 1
+
