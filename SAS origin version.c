@@ -257,6 +257,34 @@ void filtragepriorite(tache tab[]) {
 
 // Fonction de filtrage des tâches par statue
 void filtragestatut(tache tab[]) {
+    int statue ;
+    int i, found = 0;
+    printf("Entrer un statue : 1 pour complete, 0 pour incomplete : ");
+    scanf("%d", &statue);
+
+     if (statue != 0 && statue != 1) {
+        printf("statue non reconnue. Veuillez entrer 0 ou 1.\n");
+        return;
+    }
+
+            for (i = 0; i < n; i++) {
+                    if (tab[i].statue == statue)  {
+                    printf("\n---- Tache %d ----\n", i + 1);
+                    printf("Titre : %s\n", tab[i].name);
+                    printf("Description : %s\n", tab[i].description);
+                    printf("Date : %d/%d/%d\n", tab[i].date.jour, tab[i].date.mois, tab[i].date.annee);
+                    printf("Priorite : %d\n", tab[i].priorite );
+                    printf("statue : %d\n", tab[i].statue );
+                    found =1; //tache trouve
+                }
+            }
+            if (!(found)) {
+                printf("Aucune tache avec cet statue.\n");
+            }
+}
+
+
+/*void filtragestatut(tache tab[]) {
     int statue;
     int i, found = 0;
     printf("Entrer une statue: 0 pour incomplete, 1 pour complete : ");
@@ -280,7 +308,7 @@ void filtragestatut(tache tab[]) {
                 printf("Aucune tache avec cette statue.\n");
             }
 
-}
+}*/
 
 
 int main() {
